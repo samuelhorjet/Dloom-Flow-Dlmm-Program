@@ -639,7 +639,7 @@ dependencies = [
 ]
 
 [[package]]
-name = "dloom-flow"
+name = "dloom_flow"
 version = "0.1.0"
 dependencies = [
  "anchor-lang",
