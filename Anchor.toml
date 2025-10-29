@@ -6,7 +6,7 @@ resolution = true
 skip-lint = false
 
 [programs.devnet]
-dlmm_provider = "6fG9BGsHZjsV9Rie5fm2r9J9cfsqBG8kgTAicbHQtCwH"
+dloom_flow = "6fG9BGsHZjsV9Rie5fm2r9J9cfsqBG8kgTAicbHQtCwH"
 
 [registry]
 url = "https://api.apr.dev"
