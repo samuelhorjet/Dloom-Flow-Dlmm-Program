@@ -1,0 +1,1036 @@
+{
+  "address": "6fG9BGsHZjsV9Rie5fm2r9J9cfsqBG8kgTAicbHQtCwH",
+  "metadata": {
+    "name": "dloom_flow",
+    "version": "0.1.0",
+    "spec": "0.1.0",
+    "description": "Created with Anchor"
+  },
+  "instructions": [
+    {
+      "name": "add_liquidity",
+      "discriminator": [
+        181,
+        157,
+        89,
+        67,
+        143,
+        182,
+        52,
+        72
+      ],
+      "accounts": [
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "position",
+          "writable": true
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "position",
+            "user_token_a_account",
+            "user_token_b_account"
+          ]
+        },
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "user_token_a_account",
+          "writable": true
+        },
+        {
+          "name": "user_token_b_account",
+          "writable": true
+        },
+        {
+          "name": "token_a_vault",
+          "writable": true
+        },
+        {
+          "name": "token_b_vault",
+          "writable": true
+        },
+        {
+          "name": "token_a_program"
+        },
+        {
+          "name": "token_b_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "start_bin_id",
+          "type": "i32"
+        },
+        {
+          "name": "liquidity_per_bin",
+          "type": "u128"
+        }
+      ]
+    },
+    {
+      "name": "burn_empty_position",
+      "discriminator": [
+        168,
+        131,
+        222,
+        80,
+        72,
+        245,
+        157,
+        79
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "position"
+          ]
+        },
+        {
+          "name": "position",
+          "writable": true
+        },
+        {
+          "name": "position_mint",
+          "writable": true
+        },
+        {
+          "name": "user_position_nft_account",
+          "writable": true
+        },
+        {
+          "name": "token_program"
+        }
+      ],
+      "args": []
+    },
+    {
+      "name": "get_price",
+      "discriminator": [
+        238,
+        38,
+        193,
+        106,
+        228,
+        32,
+        210,
+        33
+      ],
+      "accounts": [
+        {
+          "name": "pool"
+        }
+      ],
+      "args": [
+        {
+          "name": "bin_id",
+          "type": "i32"
+        }
+      ],
+      "returns": "u128"
+    },
+    {
+      "name": "initialize_bin",
+      "discriminator": [
+        193,
+        128,
+        145,
+        146,
+        182,
+        247,
+        87,
+        8
+      ],
+      "accounts": [
+        {
+          "name": "bin",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  98,
+                  105,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "arg",
+                "path": "bin_id"
+              }
+            ]
+          }
+        },
+        {
+          "name": "pool"
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "bin_id",
+          "type": "i32"
+        }
+      ]
+    },
+    {
+      "name": "initialize_pool",
+      "discriminator": [
+        95,
+        180,
+        10,
+        172,
+        84,
+        174,
+        232,
+        40
+      ],
+      "accounts": [
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "payer",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  111,
+                  108
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "token_a_mint"
+              },
+              {
+                "kind": "account",
+                "path": "token_b_mint"
+              },
+              {
+                "kind": "arg",
+                "path": "bin_step"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_a_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "token_a_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "token_b_vault",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  118,
+                  97,
+                  117,
+                  108,
+                  116
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "pool"
+              },
+              {
+                "kind": "account",
+                "path": "token_b_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        },
+        {
+          "name": "token_a_program"
+        },
+        {
+          "name": "token_b_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "bin_step",
+          "type": "u16"
+        },
+        {
+          "name": "fee_rate",
+          "type": "u16"
+        },
+        {
+          "name": "initial_bin_id",
+          "type": "i32"
+        }
+      ]
+    },
+    {
+      "name": "modify_liquidity",
+      "discriminator": [
+        14,
+        214,
+        168,
+        41,
+        55,
+        15,
+        53,
+        17
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "old_position",
+            "new_position"
+          ]
+        },
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "old_position",
+          "writable": true
+        },
+        {
+          "name": "new_position",
+          "writable": true
+        },
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "user_token_a_account",
+          "writable": true
+        },
+        {
+          "name": "user_token_b_account",
+          "writable": true
+        },
+        {
+          "name": "token_a_vault",
+          "writable": true
+        },
+        {
+          "name": "token_b_vault",
+          "writable": true
+        },
+        {
+          "name": "token_a_program"
+        },
+        {
+          "name": "token_b_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "min_surplus_a_out",
+          "type": "u64"
+        },
+        {
+          "name": "min_surplus_b_out",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "open_position",
+      "discriminator": [
+        135,
+        128,
+        47,
+        77,
+        15,
+        152,
+        240,
+        49
+      ],
+      "accounts": [
+        {
+          "name": "pool"
+        },
+        {
+          "name": "position",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "const",
+                "value": [
+                  112,
+                  111,
+                  115,
+                  105,
+                  116,
+                  105,
+                  111,
+                  110
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position_mint"
+              }
+            ]
+          }
+        },
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "position_mint",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "user_position_nft_account",
+          "writable": true,
+          "pda": {
+            "seeds": [
+              {
+                "kind": "account",
+                "path": "owner"
+              },
+              {
+                "kind": "const",
+                "value": [
+                  6,
+                  221,
+                  246,
+                  225,
+                  215,
+                  101,
+                  161,
+                  147,
+                  217,
+                  203,
+                  225,
+                  70,
+                  206,
+                  235,
+                  121,
+                  172,
+                  28,
+                  180,
+                  133,
+                  237,
+                  95,
+                  91,
+                  55,
+                  145,
+                  58,
+                  140,
+                  245,
+                  133,
+                  126,
+                  255,
+                  0,
+                  169
+                ]
+              },
+              {
+                "kind": "account",
+                "path": "position_mint"
+              }
+            ],
+            "program": {
+              "kind": "const",
+              "value": [
+                140,
+                151,
+                37,
+                143,
+                78,
+                36,
+                137,
+                241,
+                187,
+                61,
+                16,
+                41,
+                20,
+                142,
+                13,
+                131,
+                11,
+                90,
+                19,
+                153,
+                218,
+                255,
+                16,
+                132,
+                4,
+                142,
+                123,
+                216,
+                219,
+                233,
+                248,
+                89
+              ]
+            }
+          }
+        },
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "metadata_account",
+          "writable": true
+        },
+        {
+          "name": "master_edition_account",
+          "writable": true
+        },
+        {
+          "name": "system_program",
+          "address": "11111111111111111111111111111111"
+        },
+        {
+          "name": "token_program"
+        },
+        {
+          "name": "associated_token_program",
+          "address": "ATokenGPvbdGVxr1b2hvZbsiqW5xWH25efTNsLJA8knL"
+        },
+        {
+          "name": "token_metadata_program",
+          "address": "metaqbxxUerdq28cj1RbAWkYQm3ybzjb6a8bt518x1s"
+        },
+        {
+          "name": "rent",
+          "address": "SysvarRent111111111111111111111111111111111"
+        }
+      ],
+      "args": [
+        {
+          "name": "lower_bin_id",
+          "type": "i32"
+        },
+        {
+          "name": "upper_bin_id",
+          "type": "i32"
+        }
+      ]
+    },
+    {
+      "name": "remove_liquidity",
+      "discriminator": [
+        80,
+        85,
+        209,
+        72,
+        24,
+        206,
+        177,
+        108
+      ],
+      "accounts": [
+        {
+          "name": "owner",
+          "writable": true,
+          "signer": true,
+          "relations": [
+            "position"
+          ]
+        },
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "position",
+          "writable": true
+        },
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "user_token_a_account",
+          "writable": true
+        },
+        {
+          "name": "user_token_b_account",
+          "writable": true
+        },
+        {
+          "name": "token_a_vault",
+          "writable": true
+        },
+        {
+          "name": "token_b_vault",
+          "writable": true
+        },
+        {
+          "name": "token_a_program"
+        },
+        {
+          "name": "token_b_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "liquidity_to_remove",
+          "type": "u128"
+        },
+        {
+          "name": "min_amount_a",
+          "type": "u64"
+        },
+        {
+          "name": "min_amount_b",
+          "type": "u64"
+        }
+      ]
+    },
+    {
+      "name": "swap",
+      "discriminator": [
+        248,
+        198,
+        158,
+        145,
+        225,
+        117,
+        135,
+        200
+      ],
+      "accounts": [
+        {
+          "name": "trader",
+          "writable": true,
+          "signer": true
+        },
+        {
+          "name": "pool",
+          "writable": true
+        },
+        {
+          "name": "token_a_mint"
+        },
+        {
+          "name": "token_b_mint"
+        },
+        {
+          "name": "user_source_token_account",
+          "writable": true
+        },
+        {
+          "name": "user_destination_token_account",
+          "writable": true
+        },
+        {
+          "name": "source_vault",
+          "writable": true
+        },
+        {
+          "name": "destination_vault",
+          "writable": true
+        },
+        {
+          "name": "token_a_program"
+        },
+        {
+          "name": "token_b_program"
+        }
+      ],
+      "args": [
+        {
+          "name": "amount_in",
+          "type": "u64"
+        },
+        {
+          "name": "min_amount_out",
+          "type": "u64"
+        }
+      ]
+    }
+  ],
+  "accounts": [
+    {
+      "name": "Bin",
+      "discriminator": [
+        254,
+        7,
+        131,
+        225,
+        223,
+        87,
+        157,
+        218
+      ]
+    },
+    {
+      "name": "Pool",
+      "discriminator": [
+        241,
+        154,
+        109,
+        4,
+        17,
+        177,
+        109,
+        188
+      ]
+    },
+    {
+      "name": "Position",
+      "discriminator": [
+        170,
+        188,
+        143,
+        228,
+        122,
+        64,
+        247,
+        208
+      ]
+    }
+  ],
+  "events": [
+    {
+      "name": "LiquidityRebalanced",
+      "discriminator": [
+        86,
+        57,
+        142,
+        225,
+        181,
+        136,
+        251,
+        109
+      ]
+    }
+  ],
+  "errors": [
+    {
+      "code": 6000,
+      "name": "InvalidParameters",
+      "msg": "The provided fee and bin_step parameters are not on the whitelist."
+    },
+    {
+      "code": 6001,
+      "name": "InvalidMintOrder",
+      "msg": "The mint addresses are not in the correct canonical order. Token A must be less than Token B."
+    },
+    {
+      "code": 6002,
+      "name": "InvalidMint",
+      "msg": "The provided mint does not match the pool's mint."
+    },
+    {
+      "code": 6003,
+      "name": "InvalidBinRange",
+      "msg": "The lower bin ID must be less than the upper bin ID."
+    },
+    {
+      "code": 6004,
+      "name": "ZeroLiquidity",
+      "msg": "Liquidity to deposit must be greater than zero."
+    },
+    {
+      "code": 6005,
+      "name": "SlippageExceeded",
+      "msg": "The market price moved unfavorably, exceeding your slippage tolerance."
+    },
+    {
+      "code": 6006,
+      "name": "Unauthorized",
+      "msg": "The signer is not the authorized owner of this position."
+    },
+    {
+      "code": 6007,
+      "name": "InsufficientLiquidity",
+      "msg": "The amount of liquidity to remove exceeds the amount in the position."
+    },
+    {
+      "code": 6008,
+      "name": "PositionNotEmpty",
+      "msg": "Cannot operate on a position that has no liquidity."
+    },
+    {
+      "code": 6009,
+      "name": "ZeroAmount",
+      "msg": "Input amount for a swap must be greater than zero."
+    },
+    {
+      "code": 6010,
+      "name": "InvalidVault",
+      "msg": "The provided vault account does not match the pool's vault."
+    },
+    {
+      "code": 6011,
+      "name": "InvalidBinId",
+      "msg": "The provided bin IDs must be a multiple of the pool's bin_step."
+    },
+    {
+      "code": 6012,
+      "name": "RangeTooWide",
+      "msg": "The specified bin range is wider than the allowed maximum."
+    },
+    {
+      "code": 6013,
+      "name": "MathOverflow",
+      "msg": "Math operation overflowed or underflowed."
+    },
+    {
+      "code": 6014,
+      "name": "InvalidBinStep",
+      "msg": "The provided bin step value is invalid (e.g., zero)."
+    },
+    {
+      "code": 6015,
+      "name": "InsufficientLiquidityForSwap",
+      "msg": "Not enough liquidity in the pool to complete the swap."
+    },
+    {
+      "code": 6016,
+      "name": "InvalidBinCount",
+      "msg": "The number of bins provided does not match the position's range."
+    },
+    {
+      "code": 6017,
+      "name": "InvalidBinAccount",
+      "msg": "A provided bin account does not have the expected address."
+    },
+    {
+      "code": 6018,
+      "name": "InvalidPool",
+      "msg": "The provided position account does not belong to the specified pool."
+    }
+  ],
+  "types": [
+    {
+      "name": "Bin",
+      "serialization": "bytemuck",
+      "repr": {
+        "kind": "c"
+      },
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "liquidity",
+            "type": "u128"
+          },
+          {
+            "name": "fee_growth_per_unit_a",
+            "type": "u128"
+          },
+          {
+            "name": "fee_growth_per_unit_b",
+            "type": "u128"
+          }
+        ]
+      }
+    },
+    {
+      "name": "LiquidityRebalanced",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "old_position",
+            "type": "pubkey"
+          },
+          {
+            "name": "new_position",
+            "type": "pubkey"
+          },
+          {
+            "name": "liquidity_moved",
+            "type": "u128"
+          },
+          {
+            "name": "new_lower_bin_id",
+            "type": "i32"
+          },
+          {
+            "name": "new_upper_bin_id",
+            "type": "i32"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Pool",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "bump",
+            "type": "u8"
+          },
+          {
+            "name": "token_a_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_b_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_a_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "token_b_vault",
+            "type": "pubkey"
+          },
+          {
+            "name": "active_bin_id",
+            "type": "i32"
+          },
+          {
+            "name": "bin_step",
+            "type": "u16"
+          },
+          {
+            "name": "fee_rate",
+            "type": "u16"
+          },
+          {
+            "name": "reserves_a",
+            "type": "u64"
+          },
+          {
+            "name": "reserves_b",
+            "type": "u64"
+          }
+        ]
+      }
+    },
+    {
+      "name": "Position",
+      "type": {
+        "kind": "struct",
+        "fields": [
+          {
+            "name": "pool",
+            "type": "pubkey"
+          },
+          {
+            "name": "owner",
+            "type": "pubkey"
+          },
+          {
+            "name": "lower_bin_id",
+            "type": "i32"
+          },
+          {
+            "name": "upper_bin_id",
+            "type": "i32"
+          },
+          {
+            "name": "liquidity",
+            "type": "u128"
+          },
+          {
+            "name": "position_mint",
+            "type": "pubkey"
+          },
+          {
+            "name": "fee_growth_snapshot_a",
+            "type": "u128"
+          },
+          {
+            "name": "fee_growth_snapshot_b",
+            "type": "u128"
+          }
+        ]
+      }
+    }
+  ]
+}
